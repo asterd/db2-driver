@@ -36,4 +36,9 @@ class DB2Processor extends Processor
             return is_numeric($id) ? (int) $id : $id;
         }
     }
+
+    public function processColumnListing($results)
+    {
+        return $results;
+    }
 }
