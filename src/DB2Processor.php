@@ -25,16 +25,12 @@ class DB2Processor extends Processor
 
         if (is_array($sequence)) {
             return array_values((array) $results[0]);
-        } else {
-            $result = (array) $results[0];
-            if (isset($result[$sequenceStr])) {
-                $id = $result[$sequenceStr];
-            } else {
-                $id = $result[strtoupper($sequenceStr)];
-            }
-
-            return is_numeric($id) ? (int) $id : $id;
         }
+
+        $result = (array) $results[0];
+        $id = $result[$sequenceStr] ?? $result[strtoupper($sequenceStr)] ?? $result[strtolower($sequenceStr)] ?? null;
+
+        return is_numeric($id) ? (int) $id : $id;
     }
 
     public function processColumnListing($results)
